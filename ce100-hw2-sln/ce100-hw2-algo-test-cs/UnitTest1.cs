@@ -264,3 +264,66 @@ namespace LongestCommonSubsequenceUnitTests
         }
     }
 }
+
+namespace KnapsackUnitTests
+{
+    [TestClass()]
+    public class KnapsackProblemBestTests
+    {
+        [TestMethod()]
+        public void KnapsackTest()
+        {
+            // Arrange
+            int[] v = { 60, 100, 120, 140, 160, 180, 200, 220, 240, 260 };
+            int[] w = { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
+            int C = 550;
+            int expectedResult = 1680;
+
+            // Act
+            int result = KnapsackProblem.Knapsack(v, w, C, true);
+
+            // Assert
+            Assert.AreEqual(expectedResult, result);
+        }
+    }
+
+    [TestClass()]
+    public class KnapsackProblemAverageTests
+    {
+        [TestMethod()]
+        public void KnapsackTest()
+        {
+            // Arrange
+            int[] v = { 60, 100, 120, 140, 160, 180, 200, 220, 240, 260 };
+            int[] w = { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
+            int C = 500;
+            int expectedResult = 1520;
+
+            // Act
+            int result = KnapsackProblem.Knapsack(v, w, C, true);
+
+            // Assert
+            Assert.AreEqual(expectedResult, result);
+        }
+    }
+
+    [TestClass()]
+    public class KnapsackProblemWorstTests
+    {
+        [TestMethod()]
+        public void KnapsackTest()
+        {
+            // Arrange
+            int[] v = { 60, 100, 120, 140, 160, 180, 200, 220, 240, 260 };
+            int[] w = { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
+            int C = 50;
+            int expectedResult = 220;
+
+            // Act
+            int result = KnapsackProblem.Knapsack(v, w, C, true);
+
+            // Assert
+            Assert.AreEqual(expectedResult, result);
+        }
+    }
+}

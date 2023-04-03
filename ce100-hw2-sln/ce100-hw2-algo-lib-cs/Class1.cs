@@ -326,4 +326,76 @@ namespace ce100_hw2_algo_lib_cs
 
 
     }
+
+    public class KnapsackProblem
+    {
+        /// <summary>
+        /// The 0-1 Knapsack Problem is a variation of the classic Knapsack Problem where the items to 
+        /// be placed in the knapsack are either included or excluded, not partially. It can be solved 
+        /// using dynamic programming, where the subproblems involve choosing whether or not to
+        /// include an item in the knapsack. The algorithm has a time complexity of O(nW) and a space 
+        /// complexity of O(W), where n is the number of items and W is the weight capacity of the knapsack.
+        /// </summary>
+        /// <param name="v"></param>
+        /// <param name="w"></param>
+        /// <param name="C"></param>
+        /// <param name="enableDebug"></param>
+        /// <returns></returns>
+        public static int Knapsack(int[] v, int[] w, int C, bool enableDebug = false)
+        {
+            // Initialize variables
+            int N = v.Length; // number of items
+            int[,] m = new int[N + 1, C + 1]; // 2D array to store the maximum value for each subproblem
+
+            // Initialize the first row of the 2D array
+            for (int c = 0; c <= C; c++)
+            {
+                m[0, c] = 0;
+            }
+
+            // Loop through each item
+            for (int i = 1; i <= N; i++)
+            {
+                // Loop through each capacity
+                for (int c = 0; c <= C; c++)
+                {
+                    // Check if the item can fit in the capacity
+                    if (w[i - 1] <= c)
+                    {
+                        // If the item can fit, calculate the maximum value between not including the item and including the item
+                        m[i, c] = Math.Max(m[i - 1, c], v[i - 1] + m[i - 1, c - w[i - 1]]);
+                    }
+                    else
+                    {
+                        // If the item cannot fit, use the previous maximum value
+                        m[i, c] = m[i - 1, c];
+                    }
+                }
+
+                // Debugging: Print the current maximum value for each capacity
+                if (enableDebug)
+                {
+                    Console.WriteLine($"After iteration {i}:");
+                    for (int c = 0; c <= C; c++)
+                    {
+                        Console.Write($"{m[i, c]}\t");
+                    }
+                    Console.WriteLine();
+                }
+            }
+
+            // Return the maximum value of the knapsack
+            if (m[N, C] == int.MinValue)
+            {
+                return -1;
+            }
+            else
+            {
+                return m[N, C];
+            }
+        }
+
+
+
+    }
 }
