@@ -141,3 +141,88 @@ namespace MatrixChainMultiplicationDPUnitTests
         }
     }
 }
+
+namespace MemorizedRecursiveMultiplicationUnitTests
+{
+    [TestClass()]
+    public class MemorizedRecursiveMultiplicationBestTests
+    {
+        [TestMethod()]
+        public void MatrixChainOrderTest()
+        {
+            int[] p = { 10, 20, 30, 40, 50, 60, 70 };
+            int expected = 110000;
+
+
+            int n = p.Length - 1;
+            int[,] m = new int[n, n];
+
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    m[i, j] = -1;
+                }
+            }
+
+            int result = MemorizedRecursiveMultiplication.MCMMRM(p, true);
+
+            Assert.AreEqual(expected, result);
+        }
+
+    }
+    [TestClass()]
+    public class MemorizedRecursiveMultiplicationAverageTests
+    {
+        [TestMethod()]
+        public void MatrixChainOrderTest()
+        {
+            int[] p = { 30, 35, 15, 30, 10, 20, 25 };
+            int expected = 32750;
+
+
+            int n = p.Length - 1;
+            int[,] m = new int[n, n];
+
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    m[i, j] = -1;
+                }
+            }
+
+            int result = MemorizedRecursiveMultiplication.MCMMRM(p, true);
+
+            Assert.AreEqual(expected, result);
+        }
+
+    }
+    [TestClass()]
+    public class MemorizedRecursiveMultiplicationWorstTests
+    {
+        [TestMethod()]
+        public void MatrixChainOrderTest()
+        {
+            int[] p = { 30, 35, 15, 5, 10, 20, 25 };
+            int expected = 15125;
+
+
+            int n = p.Length - 1;
+            int[,] m = new int[n, n];
+
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    m[i, j] = -1;
+                }
+            }
+
+            int result = MemorizedRecursiveMultiplication.MCMMRM(p, true);
+
+            Assert.AreEqual(expected, result);
+        }
+
+    }
+}

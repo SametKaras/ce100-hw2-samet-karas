@@ -166,4 +166,91 @@ namespace ce100_hw2_algo_lib_cs
 
 
     }
+
+    public class MemorizedRecursiveMultiplication
+    {
+        /// <summary>
+        /// Memorized Recursive Multiplication is a dynamic programming algorithm that uses 
+        /// memoization to efficiently compute the product of two matrices. It recursively breaks down
+        /// the matrices into smaller submatrices, memoizing the results of subproblems to avoid 
+        /// redundant calculations. The algorithm has a time complexity of O(n^3) and a space
+        /// complexity of O(n^2), where n is the dimension of the matrices.
+        /// </summary>
+        /// <param name="p"></param>
+        /// <param name="enableDebug"></param>
+        /// <returns></returns>
+        public static int MCMMRM(int[] p, bool enableDebug = false)
+        {
+            // Get the length of the input array, subtract 1 as it represents the number of matrices
+            int n = p.Length - 1;
+
+            // Create a 2D array to store the results of subproblems
+            int[,] m = new int[n + 1, n + 1];
+
+            // Initialize all entries of the 2D array to -1
+            for (int i = 1; i <= n; i++)
+            {
+                for (int j = 1; j <= n; j++)
+                {
+                    m[i, j] = -1;
+                }
+            }
+
+            // Define a recursive function to lookup the minimum number of scalar multiplications needed for a given matrix chain
+            int LookupChain(int i, int j)
+            {
+                // Check if the result for this subproblem has already been computed
+                if (m[i, j] != -1)
+                {
+                    return m[i, j];
+                }
+
+                // If the subproblem has only one matrix, then the cost is 0
+                if (i == j)
+                {
+                    m[i, j] = 0;
+                }
+                else
+                {
+                    // For all possible split points between i and j, compute the number of scalar multiplications needed
+                    for (int k = i; k < j; k++)
+                    {
+                        // Compute the number of scalar multiplications needed for multiplying the two subchains
+                        int q = LookupChain(i, k) + LookupChain(k + 1, j) + p[i - 1] * p[k] * p[j];
+
+                        // If this is the first time this subproblem is being computed, or the new result is smaller than the current best, update the current best
+                        if (m[i, j] == -1 || q < m[i, j])
+                        {
+                            m[i, j] = q;
+                        }
+                    }
+                }
+
+                // Print the result for this subproblem if debugging is enabled
+                if (enableDebug)
+                {
+                    Console.WriteLine($"m[{i}, {j}] = {m[i, j]}");
+                }
+
+                // Return the minimum number of scalar multiplications needed for this subproblem
+                return m[i, j];
+            };
+
+            // Compute the minimum number of scalar multiplications needed for the entire matrix chain, starting from the first matrix and ending at the last
+            int result = LookupChain(1, n);
+
+            // Return the result, or -1 if the result is negative 
+            if (result >= 0)
+            {
+                return result;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
+
+
+    }
 }
