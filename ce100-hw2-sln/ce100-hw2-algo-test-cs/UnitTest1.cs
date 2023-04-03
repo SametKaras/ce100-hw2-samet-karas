@@ -89,3 +89,55 @@ namespace HeapSortUnitTests
         }
     }
 }
+
+namespace MatrixChainMultiplicationDPUnitTests
+{
+    [TestClass()]
+    public class MatrixChainMultiplicationDPBestTests
+    {
+        [TestMethod()]
+        public void MCMDDPTest()
+        {
+            int[] d = new int[] { 10, 20, 30, 40, 50 };
+            int expected = 38000;
+
+            int result;
+            int status = MatrixChainMultiplicationDP.MCMDP(d, out result, true);
+
+            Assert.AreEqual(expected, result);
+            Assert.IsTrue(status >= 0);
+        }
+    }
+    [TestClass()]
+    public class MatrixChainMultiplicationDPAverageTests
+    {
+        [TestMethod()]
+        public void MCMDDPTest()
+        {
+            int[] d = new int[] { 10, 20, 20, 40, 30 };
+            int expected = 24000;
+
+            int result;
+            int status = MatrixChainMultiplicationDP.MCMDP(d, out result, true);
+
+            Assert.AreEqual(expected, result);
+            Assert.IsTrue(status >= 0);
+        }
+    }
+    [TestClass()]
+    public class MatrixChainMultiplicationDPWorstTests
+    {
+        [TestMethod()]
+        public void MCMDDPTest()
+        {
+            int[] d = new int[] { 10, 40, 30, 50, 20 };
+            int expected = 37000;
+
+            int result;
+            int status = MatrixChainMultiplicationDP.MCMDP(d, out result, true);
+
+            Assert.AreEqual(expected, result);
+            Assert.IsTrue(status >= 0);
+        }
+    }
+}
