@@ -226,3 +226,41 @@ namespace MemorizedRecursiveMultiplicationUnitTests
 
     }
 }
+
+namespace LongestCommonSubsequenceUnitTests
+{
+    [TestClass()]
+    public class LongestCommonSubsequenceBestTests
+    {
+        [TestMethod()]
+        public void LcsTest()
+        {
+            string X = new string('a', 100);
+            string Y = new string('a', 100);
+            Assert.AreEqual(100, LongestCommonSubsequence.LCS(X, Y, true));
+        }
+    }
+    [TestClass()]
+    public class LongestCommonSubsequenceAverageTests
+    {
+        [TestMethod()]
+        public void LcsTest()
+        {
+            string X = ("dmcsoniklbgpvzwkxfjetyhqarupjaegwmbsxdmcsoniklbgpvzwkxfjetyhqarupjaegwmbsxdmcsoniklbgpvzwkxfjetyhqa");
+            string Y = ("abcdefghıoprsjtuvyzadcfghtesjakncjqwnasasaldjqwdlqjdqwlkdjqwdksaadasdaqdqdwdqassdasdasdasdaasdhqwoı");
+
+            Assert.AreEqual(25, LongestCommonSubsequence.LCS(X, Y, true));
+        }
+    }
+    [TestClass()]
+    public class LongestCommonSubsequenceWorstTests
+    {
+        [TestMethod()]
+        public void LcsTest()
+        {
+            string X = new string('a', 100);
+            string Y = new string('b', 100);
+            Assert.AreEqual(0, LongestCommonSubsequence.LCS(X, Y, true));
+        }
+    }
+}

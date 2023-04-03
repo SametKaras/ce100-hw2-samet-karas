@@ -253,4 +253,77 @@ namespace ce100_hw2_algo_lib_cs
 
 
     }
+
+    public class LongestCommonSubsequence
+    {
+        /// <summary>
+        /// Longest Common Subsequence is a dynamic programming algorithm that efficiently finds 
+        /// the longest subsequence common to two sequences. It breaks down the problem into 
+        /// smaller subproblems, memoizing the results of subproblems to avoid redundant
+        /// calculations. The algorithm has a time complexity of O(mn) and a space complexity of
+        /// O(mn), where m and n are the lengths of the two sequences. The resulting longest common 
+        /// subsequence is not necessarily unique.
+        /// </summary>
+        /// <param name="X"></param>
+        /// <param name="Y"></param>
+        /// <param name="enableDebug"></param>
+        /// <returns></returns>
+        public static int LCS(string X, string Y, bool enableDebug = false)
+        {
+            // Get the lengths of the input strings
+            int n = X.Length;
+            int m = Y.Length;
+
+            // Create a 2D array to store the LCS values
+            int[,] l = new int[n + 1, m + 1];
+
+            // Initialize the first row and column of the array to 0
+            for (int i = 0; i <= n; i++)
+            {
+                l[i, 0] = 0;
+            }
+            for (int j = 0; j <= m; j++)
+            {
+                l[0, j] = 0;
+            }
+
+            // Fill in the rest of the array using dynamic programming
+            try
+            {
+                for (int i = 1; i <= n; i++)
+                {
+                    for (int j = 1; j <= m; j++)
+                    {
+                        if (X[i - 1] == Y[j - 1])
+                        {
+                            // If the characters match, add 1 to the LCS value
+                            l[i, j] = l[i - 1, j - 1] + 1;
+                        }
+                        else
+                        {
+                            // If the characters don't match, take the maximum of the
+                            // LCS values obtained by excluding one character from each string
+                            l[i, j] = Math.Max(l[i - 1, j], l[i, j - 1]);
+                        }
+
+                        // Print the LCS values if debug mode is enabled
+                        if (enableDebug)
+                        {
+                            Console.WriteLine($"l[{i},{j}] = {l[i, j]}");
+                        }
+                    }
+                }
+
+                // The LCS length is the value in the bottom-right corner of the array
+                return l[n, m];
+            }
+            catch
+            {
+                // Return -1 if an error occurs
+                return -1;
+            }
+        }
+
+
+    }
 }
