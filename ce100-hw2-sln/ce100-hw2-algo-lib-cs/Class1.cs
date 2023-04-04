@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/*
+* @author Samet Karas
+*/
 namespace ce100_hw2_algo_lib_cs
 {
     public class HeapSortFuncion
